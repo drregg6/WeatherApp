@@ -98,5 +98,9 @@ iOSInjectionProject/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
+# User added
+*.plist
+
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,xcode
 
