@@ -7,14 +7,7 @@
 
 import Foundation
 
-struct WeatherResults: Codable {
-    let WeatherResults: [WeatherModel]
-}
-
-struct WeatherModel: Codable, Identifiable {
-    var id: UUID {
-        return UUID()
-    }
+struct WeatherModel: Codable {
     let name: String
     let coord: CoordinateModel
     let weather: [WeatherDetailModel]

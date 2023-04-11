@@ -10,29 +10,35 @@ import MapKit
 
 struct WeatherDetail: View {
     let city: CityModel
+    @ObservedObject var weathervm = WeatherViewModel()
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Text(city.name)
-                    .font(.system(size: 20))
-                    .padding(.horizontal)
-                MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.long))
-                    .frame(height: 300)
-                    .padding(.horizontal)
-                Text("Low Temp: 75F")
-                    .font(.system(size: 20))
-                    .padding(.horizontal)
-                Text("High Temp: 95F")
-                    .font(.system(size: 20))
-                    .padding(.horizontal)
+                if let weather = weathervm.weatherData {
+                    Text(city.name)
+                        .font(.system(size: 20))
+                        .padding(.horizontal)
+                    MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.long))
+                        .frame(height: 300)
+                        .padding(.horizontal)
+                    TempMainView(weather: weather.main)
+                } else {
+                    Text("Loading...")
+                }
             }
             .padding(.horizontal)
+        }
+        .task {
+            await weathervm.fetchData(lat: city.lat, long: city.long)
+        }
+        .alert(isPresented: $weathervm.hasError, error: weathervm.error) {
+            Text("")
         }
     }
 }
 
-struct WeatherDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        WeatherDetail(city: CityModel(name: "Philadelphia", lat: 39.95, long: -75.145))
-    }
-}
+//struct WeatherDetail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WeatherDetail(city: CityModel(name: "Philadelphia", lat: 39.95, long: -75.145))
+//    }
+//}

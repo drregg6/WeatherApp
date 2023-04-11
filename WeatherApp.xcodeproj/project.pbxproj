@@ -21,6 +21,7 @@
 		FDC9483729E371FB005EF618 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC9483629E371FB005EF618 /* WeatherViewModel.swift */; };
 		FDEAFE1829E5CBA300621A36 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEAFE1729E5CBA300621A36 /* CityModel.swift */; };
 		FDEAFE1A29E5CCA600621A36 /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEAFE1929E5CCA600621A36 /* CityViewModel.swift */; };
+		FDEAFE1C29E5E51D00621A36 /* TempMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEAFE1B29E5E51D00621A36 /* TempMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		FDC9483629E371FB005EF618 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		FDEAFE1729E5CBA300621A36 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		FDEAFE1929E5CCA600621A36 /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
+		FDEAFE1B29E5E51D00621A36 /* TempMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				FDC9481F29E35EC8005EF618 /* WeatherApp.swift */,
 				FDC9482C29E3615D005EF618 /* WeatherDetail.swift */,
 				FDC9482E29E3624C005EF618 /* MapView.swift */,
+				FDEAFE1B29E5E51D00621A36 /* TempMainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				FDC9483729E371FB005EF618 /* WeatherViewModel.swift in Sources */,
 				FDC9482F29E3624C005EF618 /* MapView.swift in Sources */,
 				FDC9482029E35EC8005EF618 /* WeatherApp.swift in Sources */,
+				FDEAFE1C29E5E51D00621A36 /* TempMainView.swift in Sources */,
 				FDC9481E29E35EC8005EF618 /* WeatherAppApp.swift in Sources */,
 				FD4F6FD929E3754100294CDA /* CoordinateModel.swift in Sources */,
 				FDC9483529E3699A005EF618 /* WeatherModel.swift in Sources */,
