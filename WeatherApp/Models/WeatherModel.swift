@@ -12,5 +12,4 @@ struct WeatherModel: Codable {
     let coord: CoordinateModel
     let weather: [WeatherDetailModel]
     let main: WeatherMainModel
-    let dt: Int
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 struct WeatherMainModel: Codable {
-    let temp: Float
-    let feels_like: Float
-    let temp_min: Float
-    let temp_max: Float
+    let temp: Double
+    let feels_like: Double
+    let temp_min: Double
+    let temp_max: Double
 }

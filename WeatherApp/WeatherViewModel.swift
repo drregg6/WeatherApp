@@ -30,50 +30,54 @@ class WeatherViewModel: ObservableObject {
         self.url += "&appid=\(apiKey)"
     }
     
-//    @MainActor
-//    func fetchData(lat: Double, long: Double) async {
-//        do {
-//            buildUrl(lat: lat, long: long)
-//            guard let url = URL(string: self.url) else { fatalError("Missing URL") }
-//
-//            let urlRequest = URLRequest(url: url)
-//
-//            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-//
-//            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-//
-//            let decoder = JSONDecoder()
-//            decoder.keyDecodingStrategy = .convertFromSnakeCase
-//            let decodedData = try decoder.decode(WeatherModel.self, from: data)
-//
-//            DispatchQueue.main.async {
-//                self.weatherData = decodedData
-//            }
-//        } catch {
-//            self.hasError.toggle()
-//            self.error = WeatherModelError.customError(error: error)
-//        }
-//    }
-    
     @MainActor
     func fetchData(lat: Double, long: Double) async {
-        buildUrl(lat: lat, long: long)
-        if let url = URL(string: self.url) {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                guard let results = try JSONDecoder().decode(WeatherModel?.self, from: data) else {
-                    self.hasError.toggle()
-                    self.error = WeatherModelError.decodeError
-                    return
-                }
-                print(results)
-                self.weatherData = results
-            } catch {
-                self.hasError.toggle()
-                self.error = WeatherModelError.customError(error: error)
+        do {
+            buildUrl(lat: lat, long: long)
+            guard let url = URL(string: self.url) else { fatalError("Missing URL") }
+
+            let urlRequest = URLRequest(url: url)
+
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            print("Hello")
+
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+            print("Second check")
+
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let decodedData = try decoder.decode(WeatherModel?.self, from: data)
+            print("Third check")
+
+            DispatchQueue.main.async {
+                self.weatherData = decodedData
             }
+        } catch {
+            self.hasError.toggle()
+            self.error = WeatherModelError.customError(error: error)
         }
     }
+    
+//    @MainActor
+//    func fetchData(lat: Double, long: Double) async {
+//        buildUrl(lat: lat, long: long)
+//        if let url = URL(string: self.url) {
+//            do {
+//                let (data, _) = try await URLSession.shared.data(from: url)
+//                guard let results = try JSONDecoder().decode(WeatherModel?.self, from: data) else {
+//                    self.hasError.toggle()
+//                    self.error = WeatherModelError.decodeError
+//                    return
+//                }
+//                print("Hey there")
+//                print(results)
+//                self.weatherData = results
+//            } catch {
+//                self.hasError.toggle()
+//                self.error = WeatherModelError.customError(error: error)
+//            }
+//        }
+//    }
 }
 
 extension WeatherViewModel {
