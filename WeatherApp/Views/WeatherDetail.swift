@@ -9,13 +9,14 @@ import SwiftUI
 import MapKit
 
 struct WeatherDetail: View {
+    let city: CityModel
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Text("City Name")
+                Text(city.name)
                     .font(.system(size: 20))
                     .padding(.horizontal)
-                MapView(coordinate: CLLocationCoordinate2D(latitude: 39.953, longitude: 75.145))
+                MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.long))
                     .frame(height: 300)
                     .padding(.horizontal)
                 Text("Low Temp: 75F")
@@ -32,6 +33,6 @@ struct WeatherDetail: View {
 
 struct WeatherDetail_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherDetail()
+        WeatherDetail(city: CityModel(name: "Philadelphia", lat: 39.95, long: -75.145))
     }
 }

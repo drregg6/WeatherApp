@@ -8,34 +8,35 @@
 import SwiftUI
 
 struct WeatherApp: View {
+    var cityvm = CityViewModel()
     var body: some View {
         NavigationStack {
-            List { // This will be a list of sample cities
-                NavigationLink {
-                    WeatherDetail()
-                } label: {
-                    Text("Auburn")
+            List {
+                Group {
+                    ForEach(cityvm.listOfCities) { city in
+                        NavigationLink {
+                            WeatherDetail(city: city)
+                        } label: {
+                            Text("")
+                        }
+                    }
+                    NavigationLink {
+                        WeatherDetail(city: CityModel(name: "Philly", lat: 39.95, long: -75.145))
+                    } label: {
+                        Text("Philly")
+                    }
                 }
-                NavigationLink {
-                    WeatherDetail()
-                } label: {
-                    Text("Philadelphia")
+                .onAppear {
+                    cityvm.fetchCities()
+                }
+                Group {
+                    Text("Add a new city")
                 }
             }
-            .listStyle(.grouped)
-            .padding()
-            List { // Add a new city
-                Text("Add a new city")
-            }
+            .navigationTitle("Cities")
             .listStyle(.grouped)
             .padding()
         }
-//        .task {
-//            await hogwartsvm.fetchData()
-//        }
-        .navigationTitle("Hogwarts Houses")
-//        .alert(isPresented: $hogwartsvm.hasError, error: hogwartsvm.error) {
-//            Text("")
     }
 }
 
