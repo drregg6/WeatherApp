@@ -10,15 +10,16 @@ import SwiftUI
 struct TempMainView: View {
     let weather: WeatherMainModel
     var body: some View {
-        Text("Current Temp: \(weather.temp)")
-            .font(.system(size: 20))
-            .padding(.horizontal)
-        Text("Low Temp: \(weather.temp_min)")
-            .font(.system(size: 20))
-            .padding(.horizontal)
-        Text("High Temp: \(weather.temp_max)")
-            .font(.system(size: 20))
-            .padding(.horizontal)
+        VStack {
+            Text("Currently: \(Int(weather.temp))°F")
+                .font(.system(size: 20))
+            Text("Low: \(Int(weather.temp_min))°F")
+                .font(.system(size: 14))
+            Text("High: \(Int(weather.temp_max))°F")
+                .font(.system(size: 14))
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.horizontal)
     }
 }
 

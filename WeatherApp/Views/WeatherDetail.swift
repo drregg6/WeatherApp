@@ -15,21 +15,23 @@ struct WeatherDetail: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 if let weather = weathervm.weatherData {
-                    Text(city.name)
-                        .font(.system(size: 20))
-                        .padding(.horizontal)
-                    MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.long))
+                    MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon))
                         .frame(height: 300)
+                        //.padding(.horizontal)
+                    Text(city.name)
+                        .font(.largeTitle)
                         .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    WeatherMainView(weather: weather.weather[0])
                     TempMainView(weather: weather.main)
                 } else {
-                    Text("Loading...")
+                    ProgressView()
                 }
             }
             .padding(.horizontal)
         }
         .task {
-            await weathervm.fetchData(lat: city.lat, long: city.long)
+            await weathervm.fetchData(lat: city.lat, long: city.lon)
         }
         .alert(isPresented: $weathervm.hasError, error: weathervm.error) {
             Text("")

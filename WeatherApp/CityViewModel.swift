@@ -12,9 +12,10 @@ class CityViewModel {
     
     func fetchCities() {
         self.listOfCities = [
-            CityModel(name: "Philadelphia", lat: 39.95, long: -75.145),
-            CityModel(name: "Auburn", lat: 32.609, long: -85.48),
-            CityModel(name: "San Francisco", lat: 37.773, long: -122.431)
+            CityModel(name: "Philadelphia", lat: 39.95, lon: -75.145),
+            CityModel(name: "Auburn", lat: 32.609, lon: -85.48),
+            CityModel(name: "San Francisco", lat: 37.773, lon: -122.431)
         ]
+        print(listOfCities)
     }
 }

@@ -13,5 +13,5 @@ struct CityModel: Identifiable {
     }
     let name: String
     let lat: Double
-    let long: Double
+    let lon: Double
 }

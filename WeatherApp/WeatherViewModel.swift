@@ -15,7 +15,7 @@ class WeatherViewModel: ObservableObject {
     
     func buildUrl(lat: Double, long: Double) {
         self.url = "https://api.openweathermap.org/data/2.5/weather?"
-        self.url += "lat=\(lat)&lon=\(long)"
+        self.url += "lat=\(lat)&lon=\(long)&units=imperial"
 
         var keys: NSDictionary?
         var apiKey: String = ""
@@ -39,15 +39,11 @@ class WeatherViewModel: ObservableObject {
             let urlRequest = URLRequest(url: url)
 
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            print("Hello")
 
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-            print("Second check")
 
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let decodedData = try decoder.decode(WeatherModel?.self, from: data)
-            print("Third check")
 
             DispatchQueue.main.async {
                 self.weatherData = decodedData
@@ -55,6 +51,7 @@ class WeatherViewModel: ObservableObject {
         } catch {
             self.hasError.toggle()
             self.error = WeatherModelError.customError(error: error)
+            print(error)
         }
     }
     
