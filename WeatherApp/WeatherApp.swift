@@ -8,11 +8,11 @@
 import SwiftUI
 
 @main
-struct WeatherAppApp: App {
+struct WeatherApp: App {
     @StateObject var cityViewModel: CityViewModel = CityViewModel()
     var body: some Scene {
         WindowGroup {
-            WeatherApp()
+            Weather()
                 .environmentObject(cityViewModel)
         }
     }

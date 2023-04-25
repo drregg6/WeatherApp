@@ -22,11 +22,14 @@ class CityViewModel: ObservableObject {
             CityModel(name: "San Francisco")
         ]
         cities.append(contentsOf: newCities)
+        
     }
     
     func addCity(name: String) {
         let newCity = CityModel(name: name)
+        print(newCity)
         cities.append(newCity)
+        print(cities)
     }
     
     func deleteCity(indexSet: IndexSet) {

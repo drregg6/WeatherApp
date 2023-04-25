@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeatherApp: View {
+struct Weather: View {
     @EnvironmentObject var cityViewModel: CityViewModel
     
     var body: some View {
@@ -34,7 +34,7 @@ struct WeatherApp: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherApp()
+        Weather()
             .environmentObject(CityViewModel())
     }
 }
