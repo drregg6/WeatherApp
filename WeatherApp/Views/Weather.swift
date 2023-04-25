@@ -11,7 +11,7 @@ struct Weather: View {
     @EnvironmentObject var cityViewModel: CityViewModel
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 ForEach(cityViewModel.cities) { city in
                     NavigationLink {
