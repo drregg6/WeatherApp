@@ -11,5 +11,5 @@ struct CityModel: Identifiable {
     var id: UUID {
         return UUID()
     }
-    let name: String
+    var name: String
 }

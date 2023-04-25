@@ -8,24 +8,25 @@
 import SwiftUI
 
 struct WeatherApp: View {
-    @ObservedObject var cityViewModel = CityViewModel()
+    @EnvironmentObject var cityViewModel: CityViewModel
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(cityViewModel.listOfCities) { city in
+                ForEach(cityViewModel.cities) { city in
                     NavigationLink {
                         WeatherDetail(city: city)
                     } label: {
                         Text(city.name)
                     }
                 }
+                .onDelete(perform: cityViewModel.deleteCity)
                 Section {
                     NavigationLink {
                         NewCity()
                     } label: {
                         Text("Add a new city")
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(.gray)
                             .font(.system(size: 15))
                     }
                 }
@@ -35,9 +36,9 @@ struct WeatherApp: View {
             .listStyle(.grouped)
             .padding()
         }
-        .onAppear {
-            cityViewModel.fetchCities()
-        }
+//        .onAppear {
+//            cityViewModel.fetchCities()
+//        }
         .refreshable {
             cityViewModel.fetchCities()
         }
@@ -47,5 +48,6 @@ struct WeatherApp: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         WeatherApp()
+            .environmentObject(CityViewModel())
     }
 }
