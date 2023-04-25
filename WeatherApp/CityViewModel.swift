@@ -12,13 +12,13 @@ class CityViewModel: ObservableObject {
     
     func fetchCities() {
         self.listOfCities = [
-            CityModel(name: "Philadelphia", lat: 39.95, lon: -75.145),
-            CityModel(name: "Auburn", lat: 32.609, lon: -85.48),
-            CityModel(name: "San Francisco", lat: 37.773, lon: -122.431)
+            CityModel(name: "Philadelphia"),
+            CityModel(name: "Auburn"),
+            CityModel(name: "San Francisco")
         ]
-        print(listOfCities)
     }
-    func testCall() {
-        print(self.listOfCities)
+    
+    func addCity(city: String) {
+        self.listOfCities.append(CityModel(name: city))
     }
 }

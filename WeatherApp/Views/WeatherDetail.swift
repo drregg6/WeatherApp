@@ -26,10 +26,12 @@ struct WeatherDetail: View {
                             .font(.system(size: 64))
                             .padding(.horizontal)
                             .frame(maxWidth: .infinity, alignment: .center)
+                            .multilineTextAlignment(.center)
                         TempMainView(weather: weather.main)
                         WeatherMainView(weather: weather.weather[0])
-                        MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon))
+                        MapView(coordinate: CLLocationCoordinate2D(latitude: city.coord.lat, longitude: city.coord.lon))
                             .frame(height: 300)
+                            .clipShape(Circle())
                     }
                 } else {
                     ProgressView()
@@ -37,7 +39,7 @@ struct WeatherDetail: View {
             }
         }
         .task {
-            await weathervm.fetchData(lat: city.lat, long: city.lon)
+            await weathervm.fetchData(lat: city.coord.lat, long: city.coord.lon)
         }
         .alert(isPresented: $weathervm.hasError, error: weathervm.error) {
             Text("")
@@ -51,7 +53,6 @@ struct WeatherDetail: View {
 //    }
 //}
 
-//    Image(banner)
-//        .frame(width: 250, height: 250, alignment: .center)
-//        .aspectRatio(contentMode: .fill)
-//        .clipShape(Circle())
+//Image(banner)
+//    .frame(width: 250, height: 250, alignment: .center)
+//    .aspectRatio(contentMode: .fill)

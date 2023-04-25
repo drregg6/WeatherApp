@@ -20,15 +20,14 @@ struct WeatherApp: View {
                         Text(city.name)
                     }
                 }
-                Group {
+                Section {
                     NavigationLink {
-                        WeatherDetail(city: CityModel(name: "Philly", lat: 39.95, lon: -75.145))
+                        NewCity()
                     } label: {
-                        Text("Philly")
+                        Text("Add a new city")
+                            .foregroundColor(Color.gray)
+                            .font(.system(size: 15))
                     }
-                }
-                Group {
-                    Text("Add a new city")
                 }
             }
 
@@ -37,6 +36,9 @@ struct WeatherApp: View {
             .padding()
         }
         .onAppear {
+            cityViewModel.fetchCities()
+        }
+        .refreshable {
             cityViewModel.fetchCities()
         }
     }

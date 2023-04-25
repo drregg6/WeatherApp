@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct CityModel: Identifiable, Hashable {
+struct CityModel: Identifiable {
     var id: UUID {
         return UUID()
     }
     let name: String
-    let lat: Double
-    let lon: Double
 }
