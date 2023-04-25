@@ -11,24 +11,30 @@ import MapKit
 struct WeatherDetail: View {
     let city: CityModel
     @ObservedObject var weathervm = WeatherViewModel()
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
+            ZStack {
                 if let weather = weathervm.weatherData {
-                    MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon))
-                        .frame(height: 300)
-                        //.padding(.horizontal)
-                    Text(city.name)
-                        .font(.largeTitle)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    WeatherMainView(weather: weather.weather[0])
-                    TempMainView(weather: weather.main)
+                    Image(weather.weather[0].main.lowercased())
+                        .resizable()
+                        .scaledToFill()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    VStack {
+                        Text(city.name)
+                            .font(.system(size: 64))
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        TempMainView(weather: weather.main)
+                        WeatherMainView(weather: weather.weather[0])
+                        MapView(coordinate: CLLocationCoordinate2D(latitude: city.lat, longitude: city.lon))
+                            .frame(height: 300)
+                    }
                 } else {
                     ProgressView()
                 }
             }
-            .padding(.horizontal)
         }
         .task {
             await weathervm.fetchData(lat: city.lat, long: city.lon)
@@ -44,3 +50,8 @@ struct WeatherDetail: View {
 //        WeatherDetail(city: CityModel(name: "Philadelphia", lat: 39.95, long: -75.145))
 //    }
 //}
+
+//    Image(banner)
+//        .frame(width: 250, height: 250, alignment: .center)
+//        .aspectRatio(contentMode: .fill)
+//        .clipShape(Circle())

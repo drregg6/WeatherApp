@@ -11,8 +11,11 @@ struct WeatherMainView: View {
     let weather: WeatherDetailModel
     var body: some View {
         HStack {
-            Text(weather.description.capitalized)
-            AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(weather.icon)@2x.png"))
+            AsyncImage(url: URL(string: "https://openweathermap.org/img/wn/\(weather.icon).png"))
+                .frame(width: 50, height: 50)
+                .aspectRatio(contentMode: .fill)
+                .clipShape(Circle())
+            Text("\(weather.main.capitalized): \(weather.description.capitalized)")
         }
         .frame(maxWidth: .infinity, alignment: .center)
     }
@@ -23,3 +26,4 @@ struct WeatherMainView: View {
 //        WeatherMainView()
 //    }
 //}
+//

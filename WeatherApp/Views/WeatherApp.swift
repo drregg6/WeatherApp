@@ -9,16 +9,16 @@ import SwiftUI
 
 struct WeatherApp: View {
     var cityViewModel = CityViewModel()
+    
     var body: some View {
         NavigationStack {
             List {
                 Group {
                     ForEach(cityViewModel.listOfCities) { city in
-                        Text("Hello world!")
                         NavigationLink {
                             WeatherDetail(city: city)
                         } label: {
-                            Text("")
+                            Text(city.name)
                         }
                     }
                     NavigationLink {

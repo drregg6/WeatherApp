@@ -16,17 +16,17 @@ class WeatherViewModel: ObservableObject {
     func buildUrl(lat: Double, long: Double) {
         self.url = "https://api.openweathermap.org/data/2.5/weather?"
         self.url += "lat=\(lat)&lon=\(long)&units=imperial"
-
+        
         var keys: NSDictionary?
         var apiKey: String = ""
-
+        
         if let path = Bundle.main.path(forResource: "keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
         if let dict = keys {
             apiKey = (dict["apiKey"] as? String)!
         }
-
+        
         self.url += "&appid=\(apiKey)"
     }
     
@@ -35,16 +35,16 @@ class WeatherViewModel: ObservableObject {
         do {
             buildUrl(lat: lat, long: long)
             guard let url = URL(string: self.url) else { fatalError("Missing URL") }
-
+            
             let urlRequest = URLRequest(url: url)
-
+            
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
-
+            
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-
+            
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(WeatherModel?.self, from: data)
-
+            
             DispatchQueue.main.async {
                 self.weatherData = decodedData
             }
@@ -54,27 +54,6 @@ class WeatherViewModel: ObservableObject {
             print(error)
         }
     }
-    
-//    @MainActor
-//    func fetchData(lat: Double, long: Double) async {
-//        buildUrl(lat: lat, long: long)
-//        if let url = URL(string: self.url) {
-//            do {
-//                let (data, _) = try await URLSession.shared.data(from: url)
-//                guard let results = try JSONDecoder().decode(WeatherModel?.self, from: data) else {
-//                    self.hasError.toggle()
-//                    self.error = WeatherModelError.decodeError
-//                    return
-//                }
-//                print("Hey there")
-//                print(results)
-//                self.weatherData = results
-//            } catch {
-//                self.hasError.toggle()
-//                self.error = WeatherModelError.customError(error: error)
-//            }
-//        }
-//    }
 }
 
 extension WeatherViewModel {

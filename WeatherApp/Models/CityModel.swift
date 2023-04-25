@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CityModel: Identifiable {
+struct CityModel: Identifiable, Hashable {
     var id: UUID {
         return UUID()
     }

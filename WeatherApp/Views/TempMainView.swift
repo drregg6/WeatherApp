@@ -11,8 +11,9 @@ struct TempMainView: View {
     let weather: WeatherMainModel
     var body: some View {
         VStack {
-            Text("Currently: \(Int(weather.temp))°F")
-                .font(.system(size: 20))
+            Text("\(Int(weather.temp))°F")
+                .font(.system(size: 40))
+                .padding()
             Text("Low: \(Int(weather.temp_min))°F")
                 .font(.system(size: 14))
             Text("High: \(Int(weather.temp_max))°F")
