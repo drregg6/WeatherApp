@@ -7,8 +7,8 @@
 
 import Foundation
 
-class CityViewModel {
-    private(set) var listOfCities = [CityModel]()
+class CityViewModel: ObservableObject {
+    @Published var listOfCities = [CityModel]()
     
     func fetchCities() {
         self.listOfCities = [
@@ -17,5 +17,8 @@ class CityViewModel {
             CityModel(name: "San Francisco", lat: 37.773, lon: -122.431)
         ]
         print(listOfCities)
+    }
+    func testCall() {
+        print(self.listOfCities)
     }
 }

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct WeatherApp: View {
-    var cityViewModel = CityViewModel()
+    @ObservedObject var cityViewModel = CityViewModel()
     
     var body: some View {
         NavigationStack {
             List {
-                Group {
-                    ForEach(cityViewModel.listOfCities) { city in
-                        NavigationLink {
-                            WeatherDetail(city: city)
-                        } label: {
-                            Text(city.name)
-                        }
+                ForEach(cityViewModel.listOfCities) { city in
+                    NavigationLink {
+                        WeatherDetail(city: city)
+                    } label: {
+                        Text(city.name)
                     }
+                }
+                Group {
                     NavigationLink {
                         WeatherDetail(city: CityModel(name: "Philly", lat: 39.95, lon: -75.145))
                     } label: {
@@ -31,12 +31,13 @@ struct WeatherApp: View {
                     Text("Add a new city")
                 }
             }
-            .onAppear {
-                cityViewModel.fetchCities()
-            }
+
             .navigationTitle("Cities")
             .listStyle(.grouped)
             .padding()
+        }
+        .onAppear {
+            cityViewModel.fetchCities()
         }
     }
 }
