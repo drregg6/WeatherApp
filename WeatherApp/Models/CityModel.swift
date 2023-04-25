@@ -8,8 +8,6 @@
 import Foundation
 
 struct CityModel: Identifiable {
-    var id: UUID {
-        return UUID()
-    }
+    var id: String = UUID().uuidString
     var name: String
 }
