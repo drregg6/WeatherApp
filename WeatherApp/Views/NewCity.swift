@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct NewCity: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var cityViewModel = CityViewModel()
     @State var textField: String = ""
     
     var body: some View {
         VStack {
             TextField("New City", text: $textField)
-                .font(.system(size: 24))
                 .frame(height: 55)
                 .textFieldStyle(.roundedBorder)
                 .multilineTextAlignment(.center)
@@ -32,7 +32,8 @@ struct NewCity: View {
     }
     
     func saveButtonPressed() {
-        
+        cityViewModel.addCity(name: textField)
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

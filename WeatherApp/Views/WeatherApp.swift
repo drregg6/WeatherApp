@@ -21,26 +21,13 @@ struct WeatherApp: View {
                     }
                 }
                 .onDelete(perform: cityViewModel.deleteCity)
-                Section {
-                    NavigationLink {
-                        NewCity()
-                    } label: {
-                        Text("Add a new city")
-                            .foregroundColor(.gray)
-                            .font(.system(size: 15))
-                    }
-                }
             }
-
             .navigationTitle("Cities")
+            .navigationBarItems(
+                trailing: NavigationLink("Add city", destination: NewCity())
+            )
             .listStyle(.grouped)
             .padding()
-        }
-//        .onAppear {
-//            cityViewModel.fetchCities()
-//        }
-        .refreshable {
-            cityViewModel.fetchCities()
         }
     }
 }

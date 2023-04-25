@@ -8,18 +8,20 @@
 import Foundation
 
 class CityViewModel: ObservableObject {
-    @Published var cities = [CityModel]()
+    @Published var cities: [CityModel] = []
     
     init() {
         fetchCities()
+        print(cities)
     }
     
     func fetchCities() {
-        self.cities = [
+        let newCities = [
             CityModel(name: "Philadelphia"),
             CityModel(name: "Auburn"),
             CityModel(name: "San Francisco")
         ]
+        cities.append(contentsOf: newCities)
     }
     
     func addCity(name: String) {
