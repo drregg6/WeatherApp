@@ -13,9 +13,9 @@ class WeatherViewModel: ObservableObject {
     @Published var error: WeatherModelError?
     private var url: String = ""
     
-    func buildUrl(lat: Double, long: Double) {
+    func buildUrl(city: String) {
         self.url = "https://api.openweathermap.org/data/2.5/weather?"
-        self.url += "lat=\(lat)&lon=\(long)&units=imperial"
+        self.url += "q=\(city.replacingOccurrences(of: " ", with: "%20"))&units=imperial"
         
         var keys: NSDictionary?
         var apiKey: String = ""
@@ -31,9 +31,10 @@ class WeatherViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchData(lat: Double, long: Double) async {
+    func fetchData(city: String) async {
         do {
-            buildUrl(lat: lat, long: long)
+            buildUrl(city: city)
+            print(self.url)
             guard let url = URL(string: self.url) else { fatalError("Missing URL") }
             
             let urlRequest = URLRequest(url: url)

@@ -29,7 +29,7 @@ struct WeatherDetail: View {
                             .multilineTextAlignment(.center)
                         TempMainView(weather: weather.main)
                         WeatherMainView(weather: weather.weather[0])
-                        MapView(coordinate: CLLocationCoordinate2D(latitude: city.coord.lat, longitude: city.coord.lon))
+                        MapView(coordinate: CLLocationCoordinate2D(latitude: weather.coord.lat, longitude: weather.coord.lon))
                             .frame(height: 300)
                             .clipShape(Circle())
                     }
@@ -39,7 +39,7 @@ struct WeatherDetail: View {
             }
         }
         .task {
-            await weathervm.fetchData(lat: city.coord.lat, long: city.coord.lon)
+            await weathervm.fetchData(city: city.name)
         }
         .alert(isPresented: $weathervm.hasError, error: weathervm.error) {
             Text("")
